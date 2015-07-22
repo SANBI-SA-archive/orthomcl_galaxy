@@ -1,0 +1,3 @@
+<repositories description="The perl DBD::SQLite module requires the sqlite3 package">
+    <repository name="package_sqlite_3_8_3" owner="iuc"/>
+</repositories>

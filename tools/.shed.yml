@@ -1,0 +1,13 @@
+description: Wrappers for tools in the OrthoMCL tool suite
+homepage_url: https://github.com/stajichlab/OrthoMCL
+long_description: |
+     From the paper on the original tool:
+     "OrthoMCL provides a scalable method for constructing orthologous groups across multiple eukaryotic taxa, 
+     using a Markov Cluster algorithm to group (putative) orthologs and paralogs."
+
+     These tools wrap the modified versions from Jason Stajich's lab, based on OrthoMCL 2.0.9
+remote_repository_url: https://github.com/SANBI-SA/orthomcl_galaxy
+name: orthomcl
+owner: pvanheus
+categories:
+  - Sequence Analysis
