@@ -1,0 +1,5 @@
+<tool_dependency>
+    <package name="orthomcl" version="2.0.9-stajichlab">
+        <repository name="package_orthomcl_2_0_9_stajichlab" owner="petervh" prior_installation_required="False"/>
+    </package>
+</tool_dependency>

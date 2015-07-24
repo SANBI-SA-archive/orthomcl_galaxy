@@ -1,1 +1,62 @@
-notworking
+<tool id="orthomcl_filter_fasta" name="OrthoMCL Filter Fasta" version="2015.07.22.0">
+    <description>Combines protein datasets and filters out poor quality proteins.</description>
+    <stdio>
+        <exit_code range="1:" level="fatal" description="Error processing data"/>
+    </stdio>
+    <command><![CDATA[
+        mkdir inputs &&
+        #for $input_data in $inputs
+          /bin/bash ${__tool_directory__}/orthomcl_prepare_dataset_for_filter.sh ${input_data} &&
+        #end for
+        orthomclFilterFasta inputs/ ${min_length} ${max_percent_stop} ${good_proteins} ${poor_proteins}
+    ]]></command>
+    <inputs>
+        <param name="inputs" type="data" multiple="true" format="fasta"/>
+        <param label="Minimum protein length" name="min_length" type="integer" value="10" min="0"/>
+        <param label="Max percentage stop codons" name="max_percent_stop" type="integer" value="20" min="0" max="100"/>
+        <conditional name="poor_list">
+            <param 
+                label="Produce poor proteins list" help="Output the collection of proteins that do not pass the filter criteria"
+                name="produce_poor_list"
+                type="select"
+                >
+                <option value="yes">Yes</option>
+                <option value="no">No</option> 
+            </param>
+        </conditional>
+    </inputs>
+    <outputs>
+        <data name="good_proteins" from_work_dir="goodProteins.fasta" format="fasta"/>
+        <data name="poor_proteins" from_work_dir="poorProteins.fasta" format="fasta">
+            <filter>(poor_list['produce_poor_list'] == 'yes')</filter>
+        </data>
+    </outputs>
+    <tests>
+        <test>
+            <param name="inputs" value="xip.fasta,anc.fasta" ftype="fasta"/>
+            <param name="min_length" value="10"/>
+            <param name="max_percent_stop" value="20"/>
+            <output name="good_proteins" file="goodProteins.fasta" ftype="fasta"/>
+            <output name="poor_proteins" file="poorProteins.fasta" ftype="fasta"/>
+        </test>
+    </tests>
+    <help>
+.. class:: warningmark
+
+This tool takes multiple datasets in FASTA format that have already been prepared for use by
+OrthoMCL. Each header line should start with an identifier that includes an abbreviation
+for the dataset, followed by a | (pipe) character and finally the sequence ID. For example:
+
+    >xip|ENSXMAP00000006127
+    AAAARCRDGYTKDIRMIYVQLGLWSYSGNGSRSDPL...
+
+The abbreviation is used to differentiate sequences during later stages of OrthoMCL processing
+and is inserted by the orthomclAdjustFasta tool, so that should be run on the data before this one.
+
+The input datasets are filtered and concatenated into a set of "good" proteins (and optionally a second
+set of "poor" proteins).
+    </help>
+    <citations>
+        <citation>https://github.com/SANBI-SA/orthomcl_galaxy</citation>
+    </citations>
+</tool>
