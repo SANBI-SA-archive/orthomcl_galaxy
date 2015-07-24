@@ -1,6 +1,6 @@
 <tool_dependency>
     <package name="perl_dbd_sqlite" version="1.48">
-        <install version="1.48">
+        <install version="1.0">
             <actions>
                 <action type="setup_perl_environment">
                    <repository name="package_perl_5_18" owner="iuc">

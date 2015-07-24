@@ -1,4 +1,4 @@
 <repositories description="OrthoMCL-2.0.9-Stajich requires perl and DBD-SQLite">
     <repository name="package_perl_5_18" owner="iuc"/>
-    <repository name="package_perl_dbd_sqlite_1_48" owner="pvanheus"/>
+    <repository name="package_perl_dbd_sqlite_1_48" owner="petervh"/>
 </repositories>

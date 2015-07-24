@@ -1,2 +1,4 @@
-owner: pvanheus
+owner: petervh
 name: package_perl_dbd_sqlite
+type: tool_dependency_definition
+description: DBD::SQLite perl module
